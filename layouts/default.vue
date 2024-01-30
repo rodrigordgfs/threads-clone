@@ -30,16 +30,35 @@
           />
         </button>
         <button @click="handleLogout" class="w-full h-full">
-          <Icon
-            class="mb-1"
-            name="ph:sign-out"
-            size="32"
-            color="#FFF"
-          />
+          <Icon class="mb-1" name="ph:sign-out" size="32" color="#FFF" />
         </button>
       </div>
     </div>
   </div>
+  <CreatePost
+    :class="[
+      {
+        'max-h-[100vh] transition-all duration-200 ease-in visible':
+          userStore.isMenuOverlay,
+      },
+      {
+        'max-h-[0px] transition-all duration-200 ease-out invisible':
+          !userStore.isMenuOverlay,
+      },
+    ]"
+  />
+  <Modal
+    :class="[
+      {
+        'max-h-[100vh] transition-all duration-200 ease-in visible':
+          userStore.isLogoutOverlay,
+      },
+      {
+        'max-h-[0px] transition-all duration-200 ease-out invisible':
+          !userStore.isLogoutOverlay,
+      },
+    ]"
+  />
 </template>
 
 <script setup>
