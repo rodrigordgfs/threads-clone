@@ -13,7 +13,7 @@
     </div>
     <div
       id="BottomNav"
-      class="fixed z-50 bottom-0 flex w-full h-[70px] border-t border-t-gray-700 bg-black"
+      class="fixed z-50 bottom-0 flex w-full justify-center h-[70px] border-t border-t-gray-700 bg-black"
     >
       <div
         class="flex w-full max-w-[500px] max-auto flex items-center justify-around"
