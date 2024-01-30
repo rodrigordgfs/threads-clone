@@ -11,7 +11,8 @@ export default defineNuxtConfig({
   pages: true,
   runtimeConfig: {
     public: {
-      bucketUrl: process.env.BUCKET_URL
-    }
+      bucketUrl: process.env.BUCKET_URL,
+    },
   },
+  supabase: { redirect: false },
 });

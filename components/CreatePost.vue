@@ -18,12 +18,14 @@
       >
         <div class="py-2 w-full">
           <div class="flex items-center">
-            <div class="flex items-center text-white">
+            <div v-if="user" class="flex items-center text-white">
               <img
                 class="rounded-full h-[35px]"
-                src="https://picsum.photos/id/223/50"
+                :src="user.identities[0].identity_data.avatar_url"
               />
-              <div class="ml-2 font-semibold text-[18px]">Rodrigo Shinoda</div>
+              <div class="ml-2 font-semibold text-[18px]">
+                {{ user.identities[0].identity_data.full_name }}
+              </div>
             </div>
           </div>
           <div class="relative flex items-center w-full">
@@ -101,8 +103,8 @@ const fileData = ref(null);
 const fileDisplay = ref(null);
 const File = ref(null);
 
-// const client = useSupabaseClient()
-// const user = useSupabaseUser()
+const client = useSupabaseClient();
+const user = useSupabaseUser();
 
 const adjustTextAreaHeight = () => {
   let textarea = document.getElementById("textarea");
