@@ -7,7 +7,7 @@
       class="bg-black w-full max-w-[300px] rounded-lg text-white border border-gray-600 p-2"
     >
       <button
-        @click="useUserStore.isLogoutOverlay = false"
+        @click="useStore.isLogoutOverlay = false"
         class="flex items-center justify-between bg-black w-full p-3"
       >
         <span>Close Modal</span>
