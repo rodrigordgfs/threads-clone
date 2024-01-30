@@ -8,4 +8,10 @@ export default defineNuxtConfig({
     "@vite-pwa/nuxt",
   ],
   devtools: { enabled: true },
+  pages: true,
+  runtimeConfig: {
+    public: {
+      bucketUrl: process.env.BUCKET_URL
+    }
+  },
 });

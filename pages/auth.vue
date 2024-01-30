@@ -8,6 +8,7 @@
       <div class="max-w-[350px] mx-auto px-2 text-white">
         <div class="text-center mb-6 mt-4">Login / Register</div>
         <button
+          @click="login('github')"
           class="flex items-center justify-center gap-3 p-1.5 w-full border rounded-full text-lg font-semibold"
         >
           <div class="flex items-center gap-2 justify-center">
@@ -28,14 +29,14 @@ definePageMeta({
   layout: "auth",
 });
 
-// const client = useSupabaseClient()
-// const user = useSupabaseUser()
+const client = useSupabaseClient()
+const user = useSupabaseUser()
 
-// watchEffect(() => {
-//   if (user.value) {
-//     return navigateTo("/");
-//   }
-// });
+watchEffect(() => {
+  if (user.value) {
+    return navigateTo("/");
+  }
+});
 
 const login = async (provider) => {
   const { data, error } = await client.auth.signInWithOAuth({
