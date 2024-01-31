@@ -5,8 +5,10 @@
         <img class="w-[35px]" src="/threads-logo.png" />
         <span class="font-bold text-2xl text-white">Threads</span>
       </div>
+
       <div class="max-w-[350px] mx-auto px-2 text-white">
         <div class="text-center mb-6 mt-4">Login / Register</div>
+
         <button
           @click="login('github')"
           class="flex items-center justify-center gap-3 p-1.5 w-full border rounded-full text-lg font-semibold"
@@ -29,8 +31,8 @@ definePageMeta({
   layout: "auth",
 });
 
-const client = useSupabaseClient()
-const user = useSupabaseUser()
+const client = useSupabaseClient();
+const user = useSupabaseUser();
 
 watchEffect(() => {
   if (user.value) {
@@ -38,16 +40,12 @@ watchEffect(() => {
   }
 });
 
-const login = async (provider) => {
+const login = async (prov) => {
   const { data, error } = await client.auth.signInWithOAuth({
-    provider,
+    provider: prov,
     redirectTo: window.location.origin,
   });
 
-  if (error) {
-    console.error(error);
-  }
+  if (error) console.log(error);
 };
 </script>
-
-<style></style>

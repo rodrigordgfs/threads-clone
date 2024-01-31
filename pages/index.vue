@@ -2,13 +2,8 @@
   <div id="IndexPage" class="w-full overflow-auto">
     <div class="mx-auto max-w-[500px] overflow-hidden">
       <div id="Posts" class="px-4 max-w-[600px] mx-auto">
-        <div
-          class="text-white"
-          v-if="isPosts"
-          v-for="post in posts"
-          :key="post"
-        >
-          <Post :post="post" @isDeleted="posts = []" />
+        <div v-if="isPosts" v-for="post in posts" :key="post">
+          <Post :post="post" @isDeleted="posts = userStore.getAllPosts()" />
         </div>
         <div v-else>
           <client-only>
@@ -19,8 +14,12 @@
               <div
                 class="text-white mx-auto flex flex-col items-center justify-center"
               >
-                <Icon name="eos-icons:bubble-loading" size="50" color="#FFF" />
-                <div class="w-full mt-2">Loading...</div>
+                <Icon
+                  name="eos-icons:bubble-loading"
+                  size="50"
+                  color="#ffffff"
+                />
+                <div class="w-full mt-1">Loading...</div>
               </div>
             </div>
             <div
@@ -30,12 +29,13 @@
               <div
                 class="text-white mx-auto flex flex-col items-center justify-center"
               >
-                <Icon name="tabler:mood-empty" size="50" color="#FFF" />
-                <div class="w-full mt-2">Make the first post!</div>
+                <Icon name="tabler:mood-empty" size="50" color="#ffffff" />
+                <div class="w-full">Make the first post!</div>
               </div>
             </div>
           </client-only>
         </div>
+        <div class="mt-60" />
       </div>
     </div>
   </div>
@@ -45,9 +45,9 @@
 const userStore = useUserStore();
 const user = useSupabaseUser();
 
-const posts = ref([]);
-const isPosts = ref(false);
-const isLoading = ref(false);
+let posts = ref([]);
+let isPosts = ref(false);
+let isLoading = ref(false);
 
 watchEffect(() => {
   if (!user.value) {
@@ -67,9 +67,11 @@ onBeforeMount(async () => {
 
 onMounted(() => {
   watchEffect(() => {
+    posts.value = userStore.posts;
     if (userStore.posts && userStore.posts.length >= 1) {
-      posts.value = userStore.posts;
       isPosts.value = true;
+    } else {
+      isPosts.value = false;
     }
   });
 });
@@ -77,13 +79,13 @@ onMounted(() => {
 watch(
   () => posts.value,
   () => {
+    posts.value = userStore.posts;
     if (userStore.posts && userStore.posts.length >= 1) {
-      posts.value = userStore.posts;
       isPosts.value = true;
+    } else {
+      isPosts.value = false;
     }
   },
   { deep: true }
 );
 </script>
-
-<style></style>
